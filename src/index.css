@@ -11,3 +11,23 @@ code {
   font-family: source-code-pro, Menlo, Monaco, Consolas, 'Courier New',
     monospace;
 }
+
+#selectedFeature h5{
+  color: red;
+}
+
+#selectedPoint {
+  color:  green;
+}
+
+.flex-container {
+  display: flex;
+}
+
+.annotationCanvas {
+  flex: 1;
+}
+
+.sidebar {
+  flex: 3;
+}
