@@ -8,6 +8,8 @@ import { RootState } from '../../store'
 import Coordinate from '../../socket/utils/coordinate'
 import { stat } from 'fs'
 
+var lodash = require('lodash')
+
 var features: SocketFeature[] = []
 
 export const socketSlice = createSlice({
@@ -16,7 +18,7 @@ export const socketSlice = createSlice({
     type: 'NOT LOADED',
     selectedFeatureIndex: -1,
     selectedPointIndex: -1,
-    features: JSON.stringify(features),
+    features: features,
     
   },
   reducers: {
@@ -30,7 +32,7 @@ export const socketSlice = createSlice({
         state.type = "CCS2"
         features = new CCS2().features
       }
-      state.features = JSON.stringify(features) 
+      state.features = lodash.cloneDeep(features) 
       state.selectedFeatureIndex = 0;
     },    
 
@@ -55,7 +57,7 @@ export const socketSlice = createSlice({
     //adds a point to the current feature
     createPoint: (state, action: PayloadAction<Coordinate>) => {
       features[state.selectedFeatureIndex].annotationPoints.push(new Coordinate(action.payload.x, action.payload.y)) 
-      state.features = JSON.stringify(features)
+      state.features = lodash.cloneDeep(features) 
       //update current point index
       state.selectedPointIndex = features[state.selectedFeatureIndex].annotationPoints.length - 1;
     },
@@ -64,7 +66,7 @@ export const socketSlice = createSlice({
     updatePoint: (state, action: PayloadAction<Coordinate>) => {
       //set current selected point to the new index
       features[state.selectedFeatureIndex].annotationPoints[state.selectedPointIndex] = action.payload
-      state.features = JSON.stringify(features)
+      state.features = lodash.cloneDeep(features) 
     },
 
     //deletes selected point
@@ -73,7 +75,7 @@ export const socketSlice = createSlice({
 
       //removes entry from array at selected point
       features[state.selectedFeatureIndex].annotationPoints.splice(state.selectedPointIndex, 1)
-      state.features = JSON.stringify(features)
+      state.features = lodash.cloneDeep(features) 
 
       //set to -1 if the current the array is empty
       if(state.selectedPointIndex > 0){

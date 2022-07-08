@@ -15,20 +15,13 @@ import SocketFeature from '.././socket/socketFeatures/socketFeature';
 export function Sidebar() {
     const brightness = useSelector(selectBrightness)
     const socketType = useSelector(selectType)
-    const selectedFeatureJSON = useSelector(selectAllFeatures)
+    const currentFeatures: SocketFeature[] = useSelector(selectAllFeatures)
     const selectedfeatureIndex = useSelector(selectFeatureIndex)
     const selectedPointIndex = useSelector(selectPointIndex)
-    const [currentFeatures, setCurrentFeatures] = useState<SocketFeature[]>([])
     const dispatch = useDispatch()
   
   
-    //update the features if the JSON changes  
-    useEffect(() =>{
-      var temp: SocketFeature[] = []
-      temp = JSON.parse(selectedFeatureJSON)
-      setCurrentFeatures(temp)
-      console.log("FEATURES UPDATED")
-    }, [selectedFeatureJSON])
+
     
   
     function addCoordinate(){
@@ -69,11 +62,11 @@ export function Sidebar() {
     return (
       <div className="App sidebar">
         <header className="App-header" >
-          <h3>{socketType}
+          <h5>{socketType}
             {"feature i: " + selectedfeatureIndex}<br/>
             {"point i: " + selectedPointIndex}
             
-            </h3>
+            </h5>
             <button onClick={() => dispatch(increment())}>increment 2</button>
             <button onClick={() => dispatch(initialise("CCS1"))}>new ccs1</button>
             <button onClick={() => addCoordinate()}>add point</button>
@@ -91,7 +84,6 @@ export function Sidebar() {
           </div>
   
           
-         
         </header>
       </div>
     );

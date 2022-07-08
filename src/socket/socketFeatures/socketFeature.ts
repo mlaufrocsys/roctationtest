@@ -5,6 +5,7 @@ interface SocketFeature {
     color: string
     keyShortcut: string
     annotationPoints:  Coordinate[]
+    // drawShape(): void
 }
 
 export default SocketFeature

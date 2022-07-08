@@ -24,7 +24,7 @@ class FeatureDisplayer extends Component<SocketFeature, {}> {
     render() {
         return(
             <div className={this.props.keyShortcut}>
-                <h5>{this.props.name}</h5>  
+                <p>{this.props.name}</p>  
                 <ul>
                 {this.props.annotationPoints.map((item, i) =>
                     <li key={this.props.keyShortcut + "-" + i}>x: {item.x} y: {item.y}</li>

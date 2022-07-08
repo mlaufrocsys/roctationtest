@@ -5,7 +5,7 @@ class Ellipse implements SocketFeature {
     name: string;
     color: string;
     keyShortcut: string;
-    annotationPoints: Coordinate[]
+    annotationPoints: Coordinate[];
 
     constructor(name: string, color: string, keyShortcut: string, annotationPoints: Coordinate[]){
         this.name = name;
@@ -13,6 +13,7 @@ class Ellipse implements SocketFeature {
         this.keyShortcut = keyShortcut;
         this.annotationPoints = annotationPoints;
     }
+
 }
 
 export default Ellipse
